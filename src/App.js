@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [htmlCode, setHtmlCode] = useState('');
+
+  const handleHtmlCodeChange = (event) => {
+    setHtmlCode(event.target.value);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="section">
+        <h2>Text Section</h2>
+        <p>Insert your text here.</p>
+      </div>
+
+      <div className="section">
+        <h2>HTML Code Section</h2>
+        <textarea
+          value={htmlCode}
+          onChange={handleHtmlCodeChange}
+          placeholder="Insert your HTML code here"
+        />
+      </div>
+
+      <div className="section">
+        <h2>HTML Code Result</h2>
+        <div dangerouslySetInnerHTML={{ __html: htmlCode }} />
+      </div>
     </div>
   );
 }
