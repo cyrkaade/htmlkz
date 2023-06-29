@@ -1,89 +1,22 @@
-{
-  box-sizing: border-box;}
-
-  .column {
-    float: left;
-    width: 33.33%;
-    padding: 50px;
-    text-align: center;
-    font-size: 25px;
-    cursor: pointer;
-    color: white;
+.container {
+    display: flex;
+    height: 100vh; /* Adjust the height as needed */
   }
-
-  .tab {
+  
+  .section {
+    flex: 1;
     padding: 20px;
-    color: white;
+    border-right: 1px solid #ccc; /* Optional: Add a border between sections */
+    overflow: auto; /* Add scrollbars if the content overflows */
   }
-
-  .row:after {
-    overflow: hidden;
-    display: table;
-    clear: both;
+  
+  .section:last-child {
+    border-right: none; /* Remove the border from the last section */
   }
-
-  .closeButton {
-    float: right;
-    color: white;
-    font-size: 35px;
-    cursor: pointer;
-  }
-
-  .sti_container {
-    position: relative;
-  }
-
-  .btn {
-    position: relative;
-    display: inline-block;
-    padding: 15px;
-    background-color: blue;
-    cursor: pointer;
-    outline: none;
-    border: 0;
-    vertical-align: middle;
-    text-decoration: none;
-    color: #fff;
-    border-radius: 25px;
-    -webkit-transition: width 0.5s;
-    transition: width 0.5s;
-  }
-
-  .btn .btn-text {
-    max-width: 0;
-    display: inline-block;
-    -webkit-transition: color .25s 1.5s, max-width 2s;
-    transition: color .25s 1.5s, max-width 2s;
-    vertical-align: top;
-    white-space: nowrap;
-    overflow: hidden;
-    color: blue;
-  }
-
-  .btn:hover .btn-text {
-    max-width: 300px;
-    color: white;
-  }
-
-  .collapsible {
-    background-color: #777;
-    color: white;
-    cursor: pointer;
-    padding: 18px;
+  
+  textarea {
     width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
+    height: 200px;
+    resize: vertical;
   }
-
-  .active, .collapsible:hover {
-    background-color: #555;
-  }
-
-  .content {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #f1f1f1;
-  }
+  
