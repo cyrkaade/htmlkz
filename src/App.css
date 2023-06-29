@@ -1,60 +1,89 @@
-.App {
-  text-align: center;
-}
+{
+  box-sizing: border-box;}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 50px;
+    text-align: center;
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .tab {
+    padding: 20px;
+    color: white;
   }
-  to {
-    transform: rotate(360deg);
+
+  .row:after {
+    overflow: hidden;
+    display: table;
+    clear: both;
   }
-}
 
-.container {
-  display: flex;
-  height: 100vh; /* Adjust the height as needed */
-}
+  .closeButton {
+    float: right;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+  }
 
-.section {
-  flex: 1;
-  padding: 20px;
-  border-right: 1px solid #ccc; /* Optional: Add a border between sections */
-  overflow: auto; /* Add scrollbars if the content overflows */
-}
+  .sti_container {
+    position: relative;
+  }
 
-.section:last-child {
-  border-right: none; /* Remove the border from the last section */
-}
+  .btn {
+    position: relative;
+    display: inline-block;
+    padding: 15px;
+    background-color: blue;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 25px;
+    -webkit-transition: width 0.5s;
+    transition: width 0.5s;
+  }
 
-textarea {
-  width: 100%;
-  height: 200px;
-  resize: vertical;
-}
+  .btn .btn-text {
+    max-width: 0;
+    display: inline-block;
+    -webkit-transition: color .25s 1.5s, max-width 2s;
+    transition: color .25s 1.5s, max-width 2s;
+    vertical-align: top;
+    white-space: nowrap;
+    overflow: hidden;
+    color: blue;
+  }
+
+  .btn:hover .btn-text {
+    max-width: 300px;
+    color: white;
+  }
+
+  .collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+
+  .active, .collapsible:hover {
+    background-color: #555;
+  }
+
+  .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+  }
