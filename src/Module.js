@@ -1,6 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Lessons from './Lessons';
 
 const lessons = [
     { title: 'HTML элементтеріне сәлем айтыңыз', path: '/lesson1' },
@@ -8,6 +9,8 @@ const lessons = [
     { title: 'Параграф элементімен хабарлаңыз', path: '/lesson3' },
     // add more lessons here
 ];
+
+
 
 
 const lessons_content = [
@@ -49,50 +52,44 @@ const lessons_content = [
     // Add more lessons here
   ];
 
+  const modules = [
+    { 
+      title: 'Basic HTML and HTML5',
+      description: 'HTML is a markup language that uses a special syntax or notation to describe the structure of a webpage to the browser. HTML elements usually have opening and closing tags that surround and give meaning to content. For example, different elements can describe text as a heading, paragraph, or list item. In this course, you\'ll build a cat photo app to learn some of the most common HTML elements — the building blocks of any webpage.',
+      lessons: lessons // assuming 'lessons' is available in this scope
+    },
+    { 
+      title: 'Basic HTML and HTML5',
+      description: 'HTML is a markup language that uses a special syntax or notation to describe the structure of a webpage to the browser. HTML elements usually have opening and closing tags that surround and give meaning to content. For example, different elements can describe text as a heading, paragraph, or list item. In this course, you\'ll build a cat photo app to learn some of the most common HTML elements — the building blocks of any webpage.',
+      lessons: lessons // assuming 'lessons' is available in this scope
+    },
+    // more modules here...
+]
+
 const Module = () => {
 
-    const handleCollapsibleToggle = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
+  const handleCollapsibleToggle = () => {
+    setIsOpen(!isOpen);
+  };
 
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.display === "block") {
-            content.style.display = "none";
-            } else {
-            content.style.display = "block";
-            }
-        });
-    }
-    function openGrid(tabContent) {
-        var i, x
-        x = document.getElementsByClassName('tab')
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = 'none'
-        }
-        document.getElementById(tabContent).style.display = 'block'
-        }
-    };
-
-
-    return (
-        <div>
-            <h1>Курстар</h1>
-            <h1>HTML және HTML5</h1>
-            <button type="button" className="collapsible" onClick={handleCollapsibleToggle}>Курсты ашу</button>
-            <div className="content">
-                <ul>
-                    {lessons.map((lesson, index) => (
-                        <li key={index}><Link to={lesson.path}>{lesson.title}</Link></li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    );
-}
+  return (
+    <div>
+    <h1 className="page-header">Courses</h1>
+    <div className="center-container">
+      {modules.map((module, index) => (
+        <Lessons
+          key={index}
+          title={module.title}
+          description={module.description}
+          lessons={module.lessons}
+        />
+      ))}
+    </div>
+    </div>
+  );
+  }
 
 const getNextLessonId = (currentLessonId) => {
     const currentIndex = lessons_content.findIndex((lesson) => lesson.id === currentLessonId);
