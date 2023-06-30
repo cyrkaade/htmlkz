@@ -32,7 +32,7 @@ function Signup({ logIn }) {
 
   return (
     <div className="signup-container">
-      <h1 className="signup-heading">Signup</h1>
+      <h1 className="signup-heading">Аккаунт жасау</h1>
 
       <form className="signup-form" action="POST">
         <input
@@ -47,15 +47,15 @@ function Signup({ logIn }) {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <input type="submit" className="signup-button" value="Submit" onClick={submit} />
+        <input type="submit" className="signup-button" value="Жасау" onClick={submit} />
       </form>
 
       <div className="signup-divider">
-        <span className="signup-divider-text">OR</span>
+        <span className="signup-divider-text">Немесе</span>
       </div>
 
       <Link to="/" className="login-link">
-        Login Page
+        Кіру
       </Link>
     </div>
   );

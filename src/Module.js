@@ -4,9 +4,9 @@ import { Link, useParams } from 'react-router-dom';
 import Lessons from './Lessons';
 
 const lessons = [
-    { title: 'HTML элементтеріне сәлем айтыңыз', path: '/lesson1' },
+    { title: 'HTML элементтеріне сәлем айтыңыз', path: '/lesson1'},
     { title: 'h2 элементі бар тақырып', path: '/lesson2' },
-    { title: 'Параграф элементімен хабарлаңыз', path: '/lesson3' },
+    { title: 'Параграф элементімен хабарлаңыз', path: '/lesson3'},
     // add more lessons here
 ];
 
@@ -54,20 +54,15 @@ const lessons_content = [
 
   const modules = [
     { 
-      title: 'Basic HTML and HTML5',
-      description: 'HTML is a markup language that uses a special syntax or notation to describe the structure of a webpage to the browser. HTML elements usually have opening and closing tags that surround and give meaning to content. For example, different elements can describe text as a heading, paragraph, or list item. In this course, you\'ll build a cat photo app to learn some of the most common HTML elements — the building blocks of any webpage.',
+      title: 'Негізгі HTML және HTML5',
+      description: 'HTML-бұл браузердегі веб-беттің құрылымын сипаттау үшін арнайы синтаксисті немесе белгіні қолданатын белгілеу тілі. HTML элементтерінде әдетте мазмұнды қоршап, мағынасын беретін ашу және жабу тегтері болады. Мысалы, әртүрлі элементтер мәтінді тақырып, абзац немесе тізім элементі ретінде сипаттай алады. Бұл курста сіз кез—келген веб - беттің құрылыс блоктары болып табылатын ең көп таралған HTML элементтерін үйрену үшін мысықтардың фотосуреттері қосымшасын жасайсыз.',
       lessons: lessons // assuming 'lessons' is available in this scope
-    },
-    { 
-      title: 'Basic HTML and HTML5',
-      description: 'HTML is a markup language that uses a special syntax or notation to describe the structure of a webpage to the browser. HTML elements usually have opening and closing tags that surround and give meaning to content. For example, different elements can describe text as a heading, paragraph, or list item. In this course, you\'ll build a cat photo app to learn some of the most common HTML elements — the building blocks of any webpage.',
-      lessons: lessons // assuming 'lessons' is available in this scope
-    },
+    }
     // more modules here...
 ]
 
 const Module = () => {
-
+  
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCollapsibleToggle = () => {
@@ -76,7 +71,7 @@ const Module = () => {
 
   return (
     <div>
-    <h1 className="page-header">Courses</h1>
+    <h1 className="page-header">Курстар</h1>
     <div className="center-container">
       {modules.map((module, index) => (
         <Lessons
@@ -100,14 +95,13 @@ const getNextLessonId = (currentLessonId) => {
   };   
 
 const Lesson = () => {
-    const { lessonId } = useParams(); // "lesson1", "lesson2", etc.
-    // Fetch the lesson content based on lessonId
-    // Display the content here
-    const jsonData = lessons_content.find((lesson) => lesson.id === lessonId);
-    const nextLessonId = getNextLessonId(lessonId);
+  const { lessonId } = useParams(); 
+  const jsonData = lessons_content.find((lesson) => lesson.id === lessonId);
+  const nextLessonId = getNextLessonId(lessonId);
 
-    const [htmlCode, setHtmlCode] = useState('');
+  const [htmlCode, setHtmlCode] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
+
 
   const handleHtmlCodeChange = (event) => {
     setHtmlCode(event.target.value);
@@ -116,23 +110,43 @@ const Lesson = () => {
   const handleButtonClick = () => {
     if (htmlCode === jsonData.code) {
       setDialogOpen(true);
+      const lessonIndex = lessons.findIndex((lesson) => lesson.id === lessonId);
+      if (lessonIndex !== -1) {
+        lessons[lessonIndex].solved = true;
+      }
     }
   };
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
+    // Update localStorage
+    let completedLessons = localStorage.getItem('completedLessons');
+    if (completedLessons) {
+      completedLessons = JSON.parse(completedLessons);
+      if (!completedLessons.includes(`/${lessonId}`)) {
+        completedLessons.push(`/${lessonId}`);
+        localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+      }
+    } else {
+      localStorage.setItem('completedLessons', JSON.stringify([`/${lessonId}`]));
+    }
   };
 
   return (
-    <div className="container">
+<div className="container">
       <div className="section">
-        <h2>{jsonData.title}</h2>
-        <p>{jsonData.text}</p>
-        <button onClick={handleButtonClick}>Run the tests</button>
+        <div className="section title-section">
+          <h2>{jsonData.title}</h2>
+        </div>
+        <p class="parcontainer">{jsonData.text}</p>
+        <button onClick={handleButtonClick}>Тестілеу</button>
       </div>
 
       <div className="section">
-        <h2>HTML код секциясы</h2>
+        <div className="section title-section">
+          <h2>HTML код секциясы</h2>
+        </div>
+        <br></br>
         <textarea
           value={htmlCode}
           onChange={handleHtmlCodeChange}
@@ -141,28 +155,33 @@ const Lesson = () => {
       </div>
 
       <div className="section">
-        <h2>HTML кодының нәтижесі</h2>
-        <div dangerouslySetInnerHTML={{ __html: htmlCode }} />
+        <div className="section title-section">
+          <h2>HTML кодының нәтижесі</h2>
+        </div>
+        <br></br>
+        <div className="section result-section">
+          <div dangerouslySetInnerHTML={{ __html: htmlCode }} />
+        </div>
       </div>
 
       <Dialog open={dialogOpen} onClose={handleCloseDialog}>
-        <DialogTitle>Congratulations!</DialogTitle>
+        <DialogTitle>Құттықтаймыз!</DialogTitle>
         <DialogContent>
-          <p>You have successfully completed the challenge.</p>
+          <p>Сіз тапсырманы дұрыс орындадыңыз!</p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="primary">
-            Close
+            Жабу
           </Button>
           <Link to={`/${nextLessonId}`}>
             <Button onClick={handleCloseDialog} color="primary">
-              Go to the next challenge
+              Келесі тапсырмаға өту
             </Button>
           </Link>
         </DialogActions>
       </Dialog>
     </div>
-  );
+  )
 }
 
 export { Lesson, Module };

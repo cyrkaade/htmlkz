@@ -22,11 +22,11 @@ const Navbar = ({ isLoggedIn, logIn, logOut }) => {
       <div className="navbar-right">
         {isLoggedIn ? (
           <button className="navbar-button" onClick={logOut}>
-            Logout
+            Шығу
           </button>
         ) : (
           <button className="navbar-button" onClick={handleLoginClick}>
-            Login
+            Кіру
           </button>
         )}
       </div>
